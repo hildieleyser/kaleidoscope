@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 23, 23, 23;
+  --background-start-rgb: 250, 250, 250;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 245, 245, 245;
+    --background-start-rgb: 13, 13, 13;
+    --background-end-rgb: 23, 23, 23;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+.neuron-bg {
+  background-image: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 2px, transparent 0),
+                    radial-gradient(circle at 30% 70%, rgba(14, 165, 233, 0.08) 2px, transparent 0);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  animation: neuron-pulse 8s ease-in-out infinite;
+}
+
+@keyframes neuron-pulse {
+  0%, 100% {
+    background-size: 30px 30px;
+  }
+  50% {
+    background-size: 35px 35px;
+  }
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500;
+  background-size: 200% 200%;
+  animation: gradient-shift 10s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-underline {
+  position: relative;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(90deg, theme('colors.primary.500'), theme('colors.secondary.500'));
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.animated-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.card {
+  @apply bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300;
+}
+
+.card:hover {
+  @apply shadow-xl transform -translate-y-1;
+} 
